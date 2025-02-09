@@ -1,0 +1,19 @@
+name: IntegrityTest
+
+vars:
+  url: https://dog.ceo/api
+
+testcases:
+  - name: GetDogs
+    steps:
+    - type: http
+      method: GET
+      headers:
+        Accept: application/json
+        Content-Type: application/json
+      url: "{{.url}}/breeds/list/all"
+      retry: 1
+      delay: 2
+      assertions:
+      - result.statuscode ShouldEqual 200
+      - result.bodyjson ShouldContainKey message  
