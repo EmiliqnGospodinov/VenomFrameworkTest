@@ -1,0 +1,37 @@
+name: IntegrityTest
+
+vars:
+  url: https://template.postman-echo.com
+  api-key: KeBnYLS0.MYvbswLr73CVJpSUrlF21
+  username: HAHA1asdaasd #input username 
+
+testcases:
+- name: Get accounts
+  steps:
+  - type: http
+    method: GET
+    url: "{{.url}}"
+    path: "/api/v1/accounts"
+    headers:
+      api-key: "{{.api-key}}"
+    assertions:
+    - result.statuscode ShouldEqual 200
+
+- name: Create Account
+  steps:
+  - type: http
+    method: POST
+    url: "{{.url}}"
+    path: "/api/v1/accounts"
+    headers:
+      api-key: "{{.api-key}}"
+      Content-Type: application/json
+    body: |
+      {
+        "owner": "gagaga",
+        "balance" : 500,
+        "currency" : "COSMIC_COINS"
+      }
+    assertions:
+    - result.statuscode ShouldEqual 200
+    - result.bodyjson.account ShouldContainKey id

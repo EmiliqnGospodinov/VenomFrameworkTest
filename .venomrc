@@ -1,0 +1,4 @@
+variables_files:
+  - postmanBankAPItests.yaml
+format: xml
+output_dir: test-results
